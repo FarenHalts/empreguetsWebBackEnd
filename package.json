@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -15,5 +16,11 @@
   "bugs": {
     "url": "https://github.com/FarenHalts/empreguetsWebBackEnd/issues"
   },
-  "homepage": "https://github.com/FarenHalts/empreguetsWebBackEnd#readme"
+  "homepage": "https://github.com/FarenHalts/empreguetsWebBackEnd#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
 }
