@@ -1,7 +1,15 @@
-const express = require('express')
+const cors = require('cors')
+const customExpress = require('./config/customExpress')
+const conexao = require('./infra/conexao')
+const Tabelas = require('./infra/tabelas')
+ 
 
-const app = express()
-
-app.listen(3000, () => console.log('To rodando'));
-
-app.get('/teste-get', (req, res) => res.send('Get funcionando '))
+conexao.connect(erro => {
+    if (erro) {
+        console.log(erro);
+    } else {
+        Tabelas.init(conexao)
+        const app = customExpress()
+        app.listen(3000, () => console.log('To rodando'));
+    }
+})
