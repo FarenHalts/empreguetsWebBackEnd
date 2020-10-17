@@ -1,22 +1,24 @@
 {
-  "name": "login-node",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "dev": "nodemon server.js"
-  },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "bcrypt": "^5.0.0",
-    "body-parser": "^1.19.0",
-    "cors": "^2.8.5",
-    "express": "^4.17.1",
-    "jsonwebtoken": "^8.5.1",
-    "mysql": "^2.18.1",
-    "mysql2": "^2.2.2",
-    "nodemon": "^2.0.4",
-    "sequelize": "^6.3.5"
-  }
+    "name": "empreguets",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "dev": "nodemon server.js"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "bcrypt": "^5.0.0",
+        "body-parser": "^1.19.0",
+        "consign": "^0.1.6",
+        "cors": "^2.8.5",
+        "dotenv": "^8.2.0",
+        "express": "^4.17.1",
+        "jsonwebtoken": "^8.5.1",
+        "mysql": "^2.18.1",
+        "mysql2": "^2.2.2",
+        "nodemon": "^2.0.4",
+        "sequelize": "^6.3.5"
+    }
 }

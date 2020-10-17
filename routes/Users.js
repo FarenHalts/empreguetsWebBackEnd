@@ -20,10 +20,10 @@ users.post("/register", (req, res) => {
     }
 
     User.findOne({
-        where: {
-            email: req.body.email
-        }
-    })
+            where: {
+                email: req.body.email
+            }
+        })
         .then(user => {
             if (!user) {
                 bcrypt.hash(req.body.password, 10, (err, hash) => {
@@ -36,8 +36,8 @@ users.post("/register", (req, res) => {
                             res.send('erro: ' + err)
                         })
                 })
-            } else{
-                res.json({error: 'Usuário já existente'})
+            } else {
+                res.json({ error: 'Usuário já existente' })
             }
         })
         .catch(err => {
@@ -45,29 +45,34 @@ users.post("/register", (req, res) => {
         })
 })
 
+users.post("/teste", (req, res) => {
+    console.log("Hello world!!!");
+
+})
+
 users.post("/login", (req, res) => {
     User.findOne({
-        where:{
-            email: req.body.email
-        }
-    })
-    .then(user =>{
-        if (user) {
-            if (bcrypt.compareSync(req.body.password, user.password)) {
-                let token = jwt.sign(user.dataValues, process.env.SECRET_KEY, {
-                    expiresIn: 1440
-                })
-                res.send(token)
-            } else{
-                res.status(400).json({error: 'Senha incorreta'})
+            where: {
+                email: req.body.email
             }
-        } else{
-            res.status(400).json({error: 'Usuário não existe'})
-        }
-    })
-    .catch(err => {
-        res.status(400).json({error: err })
-    })
+        })
+        .then(user => {
+            if (user) {
+                if (bcrypt.compareSync(req.body.password, user.password)) {
+                    let token = jwt.sign(user.dataValues, process.env.SECRET_KEY, {
+                        expiresIn: 1440
+                    })
+                    res.send(token)
+                } else {
+                    res.status(400).json({ error: 'Senha incorreta' })
+                }
+            } else {
+                res.status(400).json({ error: 'Usuário não existe' })
+            }
+        })
+        .catch(err => {
+            res.status(400).json({ error: err })
+        })
 })
 
 module.exports = users
