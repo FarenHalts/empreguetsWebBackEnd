@@ -1,18 +1,15 @@
-const Sequelize = require("sequelize")
-const db = {}
-const sequelize = new Sequelize("nodejs_login1", "root", "", {
-    host: 'localhost',
-    dialect: 'mysql',
-    operatorsAliases: false,
-    pool: {
-        max: 5,
-        min: 0,
-        acquire: 30000,
-        idle: 10000
+const mysql = require('mysql2');
+require('dotenv').config()
+
+
+module.exports = {
+    connection: () => {
+        return mysql.createConnection({
+            port: process.env.DB_PORT,
+            host: process.env.DB_HOST,
+            user: process.env.DB_USER,
+            database: process.env.DB_NAME,
+            password: process.env.DB_PASS
+        }).promise()
     }
-})
-
-db.sequelize = sequelize
-db.Sequelize = Sequelize
-
-module.exports = db
+}

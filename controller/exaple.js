@@ -1,7 +1,8 @@
 'use strict'
+var userService = require('../service/userService')
 
 module.exports = {
-    test: (req, res) => {
-        console.log("hello world!!")
+    test: async (req, res) => {
+        await userService.createUser()
     }
 }
