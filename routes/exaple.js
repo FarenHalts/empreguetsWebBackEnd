@@ -1,10 +1,12 @@
-var test = require('../controller/exaple')
+var prestador = require('../controller/prestador')
+const solicitador = require('../controller/solicitador')
 const security = require('../middleware/global/security')
 
 module.exports = app => {
-    app.route('/createPrestador')
-        .get(test.test)
-        .post(test.test)
+    app.route('/prestador')
+        .post(prestador.createPrestador)
+        .get(prestador.getPrestador)
+
     app.route('/createSolicitador')
-        .post(test.createSolicitador)
+        .post(solicitador.createSolicitador)
 }

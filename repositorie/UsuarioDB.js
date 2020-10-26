@@ -27,6 +27,7 @@ module.exports = {
         getUsers: async () => {
         let response = await DB.connection()
         .query('SELECT * from emp_usuario;')
+        console.log('respostinha', response);
         return JSON.parse(JSON.stringify(response))
     }
 }
