@@ -54,7 +54,6 @@ module.exports = {
             servicos_contratados: req.body.servicos_contratados,
             id_usuario: userId
         }
-        console.log('cacete', solicitador);
         await solicitadorDB.createSolicitador(solicitador)
     },
     
