@@ -1,32 +1,61 @@
 var userDB = require('../repositorie/UsuarioDB')
 var prestadorDB = require('../repositorie/PrestadorDB')
+const solicitadorDB = require ('../repositorie/SolicitadorDB')
+const bcrypt = require('bcrypt')
 
 module.exports = {
-        createUser: async () => {
+        createUserPrestador: async (req, res) => {
+        let senha = await bcrypt.hash(req.body.senha, 10)
         var usuario = {
-            nome: 'nome',
-            email: 'lalala@hotmail.com',
-            senha: '12345',
-            telefone: '41999000',
-            cep: '81850240',
-            endereco: 'Rua Rua',
-            bairro: 'Alto',
-            num_endereco: '34',
-            complemento: 'sobrado',
-            descricao_perfil: 'Salve',
-            foto: 'tu é né',
-            tipo_usuario: 'A'
+            nome: req.body.nome,
+            email: req.body.email,
+            senha: senha,
+            telefone: req.body.telefone,
+            cep: req.body.cep,
+            endereco: req.body.endereco,
+            bairro: req.body.bairro,
+            num_endereco: req.body.num_endereco,
+            complemento: req.body.complemento,
+            descricao_perfil: req.body.descricao_perfil,
+            foto: req.body.foto,
+            tipo_usuario: req.body.tipo_usuario
         }
         var userId = await userDB.createUser(usuario)
         var prestador = {
-            cpf: '1124938',
-            rg: '2314124',
-            data_nascimento: new Date('1999/12/13'),
-            valor_diaria: '23.33',
-            raio: '34',
-            servicos_efetuados: '43',
+            cpf: req.body.cpf,
+            rg: req.body.rg,
+            data_nascimento: req.body.data_nascimento,
+            valor_diaria: req.body.valor_diaria,
+            raio: req.body.raio,
             id_usuario: userId
         }
         await prestadorDB.createPrestador(prestador)
-    }
+    },
+        createUserSolicitador: async (req, res) => {
+        let senha = await bcrypt.hash(req.body.senha, 10)
+        var usuario = {
+            nome: req.body.nome,
+            email: req.body.email,
+            senha: senha,
+            telefone: req.body.telefone,
+            cep: req.body.cep,
+            endereco: req.body.endereco,
+            bairro: req.body.bairro,
+            num_endereco: req.body.num_endereco,
+            complemento: req.body.complemento,
+            descricao_perfil: req.body.descricao_perfil,
+            foto: req.body.foto,
+            tipo_usuario: req.body.tipo_usuario
+        }
+        var userId = await userDB.createUser(usuario)
+        var solicitador = {
+            documento: req.body.documento,
+            valor_servico: req.body.valor_servico,
+            servicos_contratados: req.body.servicos_contratados,
+            id_usuario: userId
+        }
+        console.log('cacete', solicitador);
+        await solicitadorDB.createSolicitador(solicitador)
+    },
+    
 }

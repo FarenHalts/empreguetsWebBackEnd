@@ -3,6 +3,11 @@ var userService = require('../service/userService')
 
 module.exports = {
     test: async (req, res) => {
-        await userService.createUser()
+      let prestador = req
+        await userService.createUserPrestador(prestador)
+    },
+    createSolicitador: async (req, res) => {
+      let solicitador = req
+      await userService.createUserSolicitador(solicitador)
     }
 }

@@ -3,7 +3,7 @@ const DB = require('../database/db')
 module.exports = {
         createSolicitador: async (user) => {
         let response = await DB.connection()
-        .execute('INSERT INTO emp_usuario' +  
+        .execute('INSERT INTO emp_solicitador' +  
         '(documento, valor_servico, servicos_contratados, id_usuario)' + 
         'value (?,?,?,?);', 
         [
