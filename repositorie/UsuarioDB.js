@@ -29,5 +29,29 @@ module.exports = {
         .query('SELECT * from emp_usuario;')
         console.log('respostinha', response);
         return JSON.parse(JSON.stringify(response))
+    },
+    updateUser: async(user) => {
+        // let response = await DB.connection()
+        // .execute(`UPDATE emp_usuario SET nome=?, email=${user.email}, senha:${user.senha}, telefone=${user.telefone}, cep=${user.cep}, endereco=${user.endereco}, bairro=${user.bairro}, num_endereco=${user.num_endereco},  complemento=${user.complemento}, descricao_perfil=${user.descricao_perfil}, foto=${user.foto}, WHERE id_usuario = ${user.id_usuario}`)
+        let response = await DB.connection()
+        .execute('UPDATE emp_usuario ' +  
+        '(nome, email, senha, telefone, cep, endereco, bairro, num_endereco, complemento, descricao_perfil, foto, tipo_usuario) ' + 
+        'SET (?,?,?,?,?,?,?,?,?,?,?,?) WHERE ?;', 
+        [
+        user.nome,
+        user.email,
+        user.senha,
+        user.telefone,
+        user.cep,
+        user.bairro,
+        user.num_endereco,
+        user.endereco,
+        user.complemento,
+        user.descricao_perfil,
+        user.foto,
+        user.tipo_usuario,
+        user.id_usuario
+        ],
+        )
     }
 }

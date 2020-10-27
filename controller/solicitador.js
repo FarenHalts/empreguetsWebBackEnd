@@ -1,5 +1,5 @@
 'use strict'
-var createUser = require('../models/solicitador')
+var createUser = require('../services/solicitador')
 
 module.exports = {
     createSolicitador: async (req, res) => {
