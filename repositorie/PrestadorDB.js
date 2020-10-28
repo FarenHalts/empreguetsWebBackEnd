@@ -21,10 +21,16 @@ module.exports = {
         return JSON.parse(JSON.stringify(response))
     },
     updatePrestador: async(user) => {
-        // let response = await DB.connection()
-        // .execute(`UPDATE emp_prestador SET cpf=${prest.cpf} rg=${prest.rg}, data_nascimento=${prest.data_nascimento}, valor_diaria=${prest.valor_diaria}, raio=${prest.raio}, servicos_efetuados=${prest.servicos_efetuados} WHERE id_usuario = ${prest.id_usuario}`)
-        await DB.connection()
-        .execute('UPDATE emp_prestador SET ?, ?, ?, ?, ?, ? WHERE ?', [{ cpf: user.cpf, rg: user.rg, data_nascimento: user.data_nascimento, valor_diaria: user.valor_diaria, raio: user.raio, servicos_efetuados: user.servicos_efetuados}, 
-            { id_usuario: user.id_usuario }])
+        console.log(user);
+        let response = await DB.connection()
+        .query(`UPDATE emp_prestador SET cpf=?, rg=?, valor_diaria=?, raio=? WHERE id_usuario=?`,
+        [
+        user.cpf,
+        user.rg,
+        user.valor_diaria,
+        user.raio,
+        user.id_usuario
+        ],
+        )
     }
 }

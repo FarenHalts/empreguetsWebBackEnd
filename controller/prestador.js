@@ -12,8 +12,8 @@ module.exports = {
         res.json(response.OkResponse(get[0], 'Success'))
     },
     updatePrestador: async (req, res) => {
-      // console.log('to passanu', req.body);
       let prest = req
       await createUser.updateUserPrestador(prest)
+      res.json(response.OkResponse('Prestador atualizado com sucesso!'))
     }
 }
