@@ -15,5 +15,10 @@ module.exports = {
       let prest = req
       await createUser.updateUserPrestador(prest)
       res.json(response.OkResponse('Prestador atualizado com sucesso!'))
+    },
+    deletePrestador: async (req, res) => {
+      let prest = req
+      await createUser.deletePrestador(prest)
+      res.json(response.OkResponse('Prestador removido com sucesso!'))
     }
 }

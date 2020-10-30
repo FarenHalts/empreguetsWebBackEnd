@@ -63,5 +63,22 @@ module.exports = {
         }
         console.log('miauzinho', usuario, prestador);
         await prestadorDB.updatePrestador(prestador)
-    }
+    },
+    deletePrestador: async (req, res) => {
+        // PEGANDO OS DADOS DE QUEM ESTÁ SENDO REMOVIDO
+        let singlePrestador = {
+            id_usuario: req.body.id_usuario
+        }
+        let responsePrestador = await prestadorDB.getSinglePrestador(singlePrestador)
+        // SALVANDO OS DADOS DE QUEM ESTÁ SENDO REMOVIDO
+        await prestadorDB.createRemovedPrestador(responsePrestador[0])
+        let prestador = {
+            id_usuario: req.body.id_usuario
+        }
+        await prestadorDB.deletePrestador(prestador)
+        let usuario = {
+            id_usuario: req.body.id_usuario
+        }
+        await userDB.deleteUser(usuario)
+    },
 }

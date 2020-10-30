@@ -7,6 +7,7 @@ module.exports = app => {
         .post(prestador.createPrestador)
         .get(prestador.getPrestador)
         .put(prestador.updatePrestador)
+        .delete(prestador.deletePrestador)
 
     app.route('/createSolicitador')
         .post(solicitador.createSolicitador)

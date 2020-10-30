@@ -49,5 +49,12 @@ module.exports = {
         user.tipo_usuario,
         user.id_usuario
         ])
-    }
+    },
+    deleteUser: async (user) => {
+        let response = await DB.connection()
+        .execute('DELETE FROM `emp_usuario` WHERE id_usuario=?',
+        [
+            user.id_usuario
+        ])
+    },
 }
