@@ -1,9 +1,10 @@
 const userDB = require('../repositorie/UsuarioDB')
 const prestadorDB = require('../repositorie/PrestadorDB')
 const bcrypt = require('bcrypt')
+const moment = require('moment')
 
 module.exports = {
-        createUserPrestador: async (req, res) => {
+    createUserPrestador: async (req, res) => {
         let senha = await bcrypt.hash(req.body.senha, 10)
         var usuario = {
             nome: req.body.nome,
@@ -35,7 +36,7 @@ module.exports = {
         return oi
         // console.log('aaaa', oi);
     },
-    updateUserPrestador: async (req ,res) => {
+    updateUserPrestador: async (req, res) => {
         // console.log('pika', req.body.nome);
         var usuario = {
             nome: req.body.nome,
@@ -65,13 +66,14 @@ module.exports = {
         await prestadorDB.updatePrestador(prestador)
     },
     deletePrestador: async (req, res) => {
+        const removedData = moment().format('DD-MM-YYYY');
         // PEGANDO OS DADOS DE QUEM ESTÁ SENDO REMOVIDO
         let singlePrestador = {
             id_usuario: req.body.id_usuario
         }
-        let responsePrestador = await prestadorDB.getSinglePrestador(singlePrestador)
+        let responsePrestador = await prestadorDB.getSinglePrestador(singlePrestador.id_usuario)
         // SALVANDO OS DADOS DE QUEM ESTÁ SENDO REMOVIDO
-        await prestadorDB.createRemovedPrestador(responsePrestador[0])
+        await prestadorDB.createRemovedPrestador(responsePrestador[0], removedData)
         let prestador = {
             id_usuario: req.body.id_usuario
         }
@@ -80,5 +82,9 @@ module.exports = {
             id_usuario: req.body.id_usuario
         }
         await userDB.deleteUser(usuario)
+    },
+    getSinglePrestador: async (req, res) => {
+        const oi = await prestadorDB.getSinglePrestador(req)
+        return oi
     },
 }
