@@ -1,5 +1,6 @@
 const prestador = require('../controller/prestador')
 const solicitador = require('../controller/solicitador')
+const servico = require('../controller/servico')
 const security = require('../middleware/global/security')
 
 module.exports = app => {
@@ -31,5 +32,8 @@ module.exports = app => {
     app.route('/solicitador/:id')
         //Pegar um Solicitador especifico
         .get(solicitador.getSingleSolicitador)
-    //Fim prestadores Unicos
+        //Fim prestadores Unicos
+
+    app.route('/marcarservico')
+        .post(servico.reserveService)
 }
