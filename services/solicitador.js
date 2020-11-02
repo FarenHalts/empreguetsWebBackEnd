@@ -18,7 +18,8 @@ module.exports = {
             complemento: req.body.complemento,
             descricao_perfil: req.body.descricao_perfil,
             foto: req.body.foto,
-            tipo_usuario: req.body.tipo_usuario
+            tipo_usuario: req.body.tipo_usuario,
+            solicitacao: 'false'
         }
         var userId = await userDB.createUser(usuario)
         var solicitador = {

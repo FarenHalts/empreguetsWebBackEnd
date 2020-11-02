@@ -36,4 +36,7 @@ module.exports = app => {
 
     app.route('/marcarservico')
         .post(servico.reserveService)
+
+    app.route('/servico/:id')
+        .get(servico.getServices)
 }
