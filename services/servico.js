@@ -14,4 +14,12 @@ module.exports = {
         }
         await servicoDB.reserveService(servico)
     },
+    checkUser: async (req, res) => {
+        //Verificando se o usuario possui algum serviço em andamento ou em solicitação
+        let verifyService = {
+            id: req.body.id_usuario
+        }
+        let responseVerify = await servicoDB.verifyService(verifyService.id)
+        return responseVerify
+    }
 }

@@ -15,4 +15,13 @@ module.exports = {
                     service.id_usuario,
                 ])
     },
+    verifyService: async (id) => {
+        let response = await DB.connection()
+            .query('SELECT * FROM `emp_agenda` AS agenda WHERE agenda.id_requisitado=? OR agenda.id_usuario=? ',
+            [
+                id,
+                id
+            ])
+        return JSON.parse(JSON.stringify(response[0]))
+    },
 }

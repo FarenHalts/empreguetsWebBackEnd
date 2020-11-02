@@ -2,6 +2,8 @@ const userDB = require('../repositorie/UsuarioDB')
 const prestadorDB = require('../repositorie/PrestadorDB')
 const bcrypt = require('bcrypt')
 const moment = require('moment')
+const servico = require('./servico')
+const servicoDB = require('../repositorie/servicoDB')
 
 module.exports = {
     createUserPrestador: async (req, res) => {
