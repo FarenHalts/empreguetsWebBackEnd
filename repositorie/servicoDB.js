@@ -5,16 +5,15 @@ module.exports = {
     reserveService: async (service) => {
         let response = await DB.connection()
             .execute('INSERT INTO emp_agenda ' +
-                '(id_requisitado, data, endereco, valor_proposto, novo_valor, id_usuario, visualizado) ' +
-                'value (?,?,?,?,?,?,?);',
+                '(id_requisitado, data, endereco, valor_proposto, novo_valor, id_usuario) ' +
+                'value (?,?,?,?,?,?);',
                 [
                     service.id_requisitado,
                     service.data,
                     service.endereco,
                     service.valor_proposto,
                     service.novo_valor,
-                    service.id_usuario,
-                    service.visualizado
+                    service.id_usuario
                 ])
     },
     verifyService: async (id) => {
@@ -35,6 +34,7 @@ module.exports = {
                 ],
             )
     },
+    //Listar todos o serviços baseados em um usuário
     getServices: async (id) => {
         let response = await DB.connection()
             .query('SELECT * FROM emp_agenda WHERE id_requisitado=? ',
@@ -42,5 +42,37 @@ module.exports = {
                 id
             ])
         return JSON.parse(JSON.stringify(response[0]))
+    },
+    //Listar um unico serviço
+    getServiceId: async (id) => {
+        let response = await DB.connection()
+            .query('SELECT * FROM emp_agenda WHERE id_agenda=? ',
+            [
+                id
+            ])
+        return JSON.parse(JSON.stringify(response[0]))
+    },
+    discardService: async (service) => {
+        let response = await DB.connection()
+            .execute('INSERT INTO emp_agendamentos_recusados ' +
+                '(id_agenda, id_requisitado, id_usuario, data, endereco, valor_proposto, novo_valor, data_recusado) ' +
+                'value (?,?,?,?,?,?,?,?);',
+                [
+                    service.id_agenda,
+                    service.id_requisitado,
+                    service.id_usuario,
+                    service.data,
+                    service.endereco,
+                    service.valor_proposto,
+                    service.novo_valor,
+                    service.data_recusado
+                ])
+    },
+    removeFromList: async (id) => {
+        let response = await DB.connection()
+            .execute('DELETE FROM `emp_agenda` WHERE id_agenda=?',
+                [
+                    id
+                ])
     },
 }

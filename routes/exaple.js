@@ -32,11 +32,14 @@ module.exports = app => {
     app.route('/solicitador/:id')
         //Pegar um Solicitador especifico
         .get(solicitador.getSingleSolicitador)
-        //Fim prestadores Unicos
+    //Fim prestadores Unicos
 
     app.route('/marcarservico')
         .post(servico.reserveService)
 
     app.route('/servico/:id')
         .get(servico.getServices)
+
+    app.route('/rejeitarservico')
+        .post(servico.discardService)
 }

@@ -16,8 +16,7 @@ module.exports = {
             data: req.body.data,
             endereco: req.body.endereco,
             valor_proposto: req.body.valor_proposto,
-            novo_valor: req.body.novo_valor,
-            visualizado: 'false'
+            novo_valor: req.body.novo_valor
         }
         await servicoDB.reserveService(servico)
     },
@@ -33,4 +32,26 @@ module.exports = {
         const servicos = await servicoDB.getServices(req)
         return servicos
     },
+    getServiceId: async (req, res) => {
+        const servico = await servicoDB.getServiceId(req)
+        return servico
+    },
+    discardService: async (req, res) => {
+        const discardData = moment().format('DD-MM-YYYY');
+        const discard = {
+            id_agenda: req.id_agenda,
+            id_requisitado: req.id_requisitado,
+            data: req.data,
+            endereco: req.endereco,
+            valor_proposto: req.valor_proposto,
+            novo_valor: req.novo_valor,
+            id_usuario: req.id_usuario,
+            data_recusado: discardData
+        }
+        let responseDiscard = await servicoDB.discardService(discard)
+        return responseDiscard
+    },
+    removeFromList: async (req, res) => {
+        await servicoDB.removeFromList(req)
+    }
 }
