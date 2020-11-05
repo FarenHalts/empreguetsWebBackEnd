@@ -23,17 +23,18 @@ module.exports = {
     checkUser: async (req, res) => {
         //Verificando se o usuario possui algum serviço em andamento ou em solicitação
         let verifyService = {
-            id: req.body.id_usuario
+            id: req.body.id_usuario,
+            id2: req.body.id_usuario
         }
-        let responseVerify = await servicoDB.verifyService(verifyService.id)
+        let responseVerify = await servicoDB.verifyService(verifyService)
         return responseVerify
     },
-    getServices: async (req, res) => {
-        const servicos = await servicoDB.getServices(req)
+    getScheduling: async (req, res) => {
+        const servicos = await servicoDB.getScheduling(req)
         return servicos
     },
-    getServiceId: async (req, res) => {
-        const servico = await servicoDB.getServiceId(req)
+    getScheduleId: async (req, res) => {
+        const servico = await servicoDB.getScheduleId(req)
         return servico
     },
     discardService: async (req, res) => {
@@ -53,5 +54,38 @@ module.exports = {
     },
     removeFromList: async (req, res) => {
         await servicoDB.removeFromList(req)
-    }
+    },
+    setSolicitationFalse: async (req, res) => {
+        let solicitation = {
+            id_usuario: req,
+            statusSolicitation: 'false'
+        }
+        await servicoDB.updateSolicitation(solicitation)
+    },
+    acceptService: async (req, res) => {
+        const acceptData = moment().format('DD-MM-YYYY');
+        const status = 'Pendente'
+        let valor = null
+        //Validando se o usuario aceitou o novo valor proposto
+        if (req.novo_valor) {
+            valor = req.novo_valor
+        } else {
+            valor = req.valor_proposto
+        }
+        let service = {
+            id_usuario: req.id_usuario,
+            id_requisitado: req.id_requisitado,
+            endereco: req.endereco,
+            valor_proposto: valor,
+            data: req.data,
+            status_servico: status,
+            data_aceito: acceptData
+        }
+        await servicoDB.acceptService(service)
+    },
+    getServices: async (req, res) => {
+        const servicos = await servicoDB.getServices(req)
+        console.log(servicos);
+        return servicos
+    },
 }

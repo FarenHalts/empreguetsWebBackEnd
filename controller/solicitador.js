@@ -30,7 +30,7 @@ module.exports = {
       //Verificando se o usuario possui algum serviço em andamento ou em solicitação
       const verify = await service.checkUser(req)
       if (verify.length > 0) {
-        res.status(400).send(apiResponse.ErrorResponse(null, 'Não foi possível exlcluir este perfil pois ainda existem serviços em andamento ou solicitações enviadas!'))
+        res.status(400).send(apiResponse.ErrorResponse(null, 'Não foi possível exlcluir este perfil pois ainda existem serviços em andamento!'))
       } else {
         let solicitador = req
         await createUser.deleteSolicitador(solicitador)

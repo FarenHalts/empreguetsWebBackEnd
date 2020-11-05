@@ -37,9 +37,15 @@ module.exports = app => {
     app.route('/marcarservico')
         .post(servico.reserveService)
 
-    app.route('/servico/:id')
-        .get(servico.getServices)
+    app.route('/agendamento/:id')
+        .get(servico.getScheduling)
 
     app.route('/rejeitarservico')
         .post(servico.discardService)
+
+    app.route('/aceitarservico')
+        .post(servico.acceptService)
+
+    app.route('/servico/:id')
+        .get(servico.getServices)
 }

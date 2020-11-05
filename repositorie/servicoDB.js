@@ -18,10 +18,10 @@ module.exports = {
     },
     verifyService: async (id) => {
         let response = await DB.connection()
-            .query('SELECT * FROM `emp_agenda` AS agenda WHERE agenda.id_requisitado=? OR agenda.id_usuario=? ',
+            .query('SELECT * FROM emp_servico WHERE id_requisitado=? OR id_usuario=? AND status_servico="Pendente"  ',
             [
-                id,
-                id
+                id.id,
+                id.id2
             ])
         return JSON.parse(JSON.stringify(response[0]))
     },
@@ -34,8 +34,8 @@ module.exports = {
                 ],
             )
     },
-    //Listar todos o serviços baseados em um usuário
-    getServices: async (id) => {
+    //Listar todos os agendamentos baseados em um usuário
+    getScheduling: async (id) => {
         let response = await DB.connection()
             .query('SELECT * FROM emp_agenda WHERE id_requisitado=? ',
             [
@@ -44,7 +44,7 @@ module.exports = {
         return JSON.parse(JSON.stringify(response[0]))
     },
     //Listar um unico serviço
-    getServiceId: async (id) => {
+    getScheduleId: async (id) => {
         let response = await DB.connection()
             .query('SELECT * FROM emp_agenda WHERE id_agenda=? ',
             [
@@ -74,5 +74,38 @@ module.exports = {
                 [
                     id
                 ])
+    },
+    //Setando o atributo "solicitacao" para false, onde indica que o usuario nao possui mais nenhum servico em solicitacao
+    updateSolicitation: async (solicitacao) => {
+        let response = await DB.connection()
+            .query(`UPDATE emp_usuario SET solicitacao=? WHERE id_usuario=?`,
+                [
+                    solicitacao.statusSolicitation,
+                    solicitacao.id_usuario
+                ],
+            )
+    },
+    acceptService: async (service) => {
+        let response = await DB.connection()
+            .execute('INSERT INTO emp_servico ' +
+                '(id_usuario, id_requisitado, endereco, valor, data, status_servico, data_aceito) ' +
+                'value (?,?,?,?,?,?,?);',
+                [
+                    service.id_usuario,
+                    service.id_requisitado,
+                    service.endereco,
+                    service.valor_proposto,
+                    service.data,
+                    service.status_servico,
+                    service.data_aceito,
+                ])
+    },
+    getServices: async (id) => {
+        let response = await DB.connection()
+            .query('SELECT * FROM emp_servico WHERE id_requisitado=? AND status_servico="Pendente" ',
+            [
+                id
+            ])
+        return JSON.parse(JSON.stringify(response[0]))
     },
 }
