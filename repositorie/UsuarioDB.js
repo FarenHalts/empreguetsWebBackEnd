@@ -58,4 +58,12 @@ module.exports = {
                     user.id_usuario
                 ])
     },
+    getSingleUser: async (id) => {
+        let response = await DB.connection()
+            .execute('SELECT * from emp_usuario WHERE id_usuario=?;',
+                [
+                    id
+                ])
+        return JSON.parse(JSON.stringify(response[0]))
+    },
 }

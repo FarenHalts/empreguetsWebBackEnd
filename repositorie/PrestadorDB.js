@@ -17,7 +17,7 @@ module.exports = {
     },
     getPrestador: async () => {
         let response = await DB.connection()
-            .query('SELECT * from emp_prestador AS prestador INNER JOIN emp_usuario AS usuario ON prestador.id_usuario = usuario.id_usuario;')
+            .query('SELECT * FROM emp_prestador AS prestador INNER JOIN emp_usuario AS usuario ON prestador.id_usuario = usuario.id_usuario;')
         return JSON.parse(JSON.stringify(response))
     },
     updatePrestador: async (user) => {
