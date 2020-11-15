@@ -19,10 +19,10 @@ module.exports = {
     verifyService: async (id) => {
         let response = await DB.connection()
             .query('SELECT * FROM emp_servico WHERE id_requisitado=? OR id_usuario=? AND status_servico="Pendente"  ',
-            [
-                id.id,
-                id.id2
-            ])
+                [
+                    id.id,
+                    id.id2
+                ])
         return JSON.parse(JSON.stringify(response[0]))
     },
     solicitacaoTrue: async (solicitacao) => {
@@ -38,18 +38,18 @@ module.exports = {
     getScheduling: async (id) => {
         let response = await DB.connection()
             .query('SELECT * FROM emp_agenda WHERE id_requisitado=? ',
-            [
-                id
-            ])
+                [
+                    id
+                ])
         return JSON.parse(JSON.stringify(response[0]))
     },
     //Listar um unico serviço
     getScheduleId: async (id) => {
         let response = await DB.connection()
             .query('SELECT * FROM emp_agenda WHERE id_agenda=? ',
-            [
-                id
-            ])
+                [
+                    id
+                ])
         return JSON.parse(JSON.stringify(response[0]))
     },
     discardService: async (service) => {
@@ -103,9 +103,46 @@ module.exports = {
     getServices: async (id) => {
         let response = await DB.connection()
             .query('SELECT * FROM emp_servico WHERE id_requisitado=? AND status_servico="Pendente" ',
-            [
-                id
-            ])
+                [
+                    id
+                ])
+        return JSON.parse(JSON.stringify(response[0]))
+    },
+    checkService: async (id) => {
+        let response = await DB.connection()
+            .query('SELECT * FROM emp_servico WHERE id_servico=?',
+                [
+                    id
+                ])
+        return JSON.parse(JSON.stringify(response[0]))
+    },
+    rateService: async (rateOBJ) => {
+        let response = await DB.connection()
+            .execute('INSERT INTO emp_avaliacoes ' +
+                '(id_usuario, id_analista, comentario, avaliacao, data_avaliacao) ' +
+                'value (?,?,?,?,?);',
+                [
+                    rateOBJ.id_usuarioAvaliado,
+                    rateOBJ.id_analista,
+                    rateOBJ.comentario,
+                    rateOBJ.avaliacao,
+                    rateOBJ.data_avaliacao
+                ])
+    },
+    getRates: async (id) => {
+        let response = await DB.connection()
+            .query('SELECT * FROM emp_avaliacoes WHERE id_usuario=? ORDER BY data_avaliacao DESC LIMIT 5',
+                [
+                    id
+                ])
+        return JSON.parse(JSON.stringify(response[0]))
+    },
+    getAverage: async (id) => {
+        let response = await DB.connection()
+            .query('SELECT AVG(avaliacao) AS media FROM emp_avaliacoes WHERE id_usuario=?',
+                [
+                    id
+                ])
         return JSON.parse(JSON.stringify(response[0]))
     },
 }

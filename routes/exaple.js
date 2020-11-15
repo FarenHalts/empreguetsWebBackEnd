@@ -52,4 +52,10 @@ module.exports = app => {
 
     app.route('/grafico/:id')
         .get(grafico.getDataGraphic)
+
+    app.route('/avaliarservico')
+        .post(servico.rateService)
+
+    app.route('/avalicoes/:id')
+        .get(servico.getRates)
 }

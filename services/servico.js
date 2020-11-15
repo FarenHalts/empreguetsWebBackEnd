@@ -1,4 +1,5 @@
 const servicoDB = require('../repositorie/servicoDB')
+const usuarioDB = require('../repositorie/UsuarioDB')
 const bcrypt = require('bcrypt')
 const moment = require('moment')
 
@@ -88,4 +89,35 @@ module.exports = {
         console.log(servicos);
         return servicos
     },
+    checkService: async (req, res) => {
+        const service = await servicoDB.checkService(req)
+        return service
+    },
+    rateService: async (service, req, res) => {
+        let today = moment().format("DD/MM/YYYY HH:mm")
+        let rating = {
+            id_usuarioAvaliado: service[0].id_requisitado,
+            id_analista: service[0].id_usuario,
+            comentario: req.descricao_avaliacao,
+            avaliacao: req.avaliacao,
+            data_avaliacao: today
+        }
+        const rate = await servicoDB.rateService(rating)
+    },
+    getRates: async (req, res) => {
+        const rate = await servicoDB.getRates(req)
+        return rate
+    },
+    getAverageRate: async (req, res) => {
+        const average = await servicoDB.getAverage(req)
+        const a = average[0].media;
+        const str_a = a.toString();
+        const result = Number(str_a.slice(0, 4));
+
+        let avg = {
+            usuario: req,
+            media: result
+        }
+        await usuarioDB.updateAverage(avg)
+    }
 }

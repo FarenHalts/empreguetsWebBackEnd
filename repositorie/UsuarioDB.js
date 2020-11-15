@@ -66,4 +66,12 @@ module.exports = {
                 ])
         return JSON.parse(JSON.stringify(response[0]))
     },
+    updateAverage: async (avg) => {
+        let response = await DB.connection()
+            .execute(`UPDATE emp_usuario SET avaliacao_media=? WHERE id_usuario=?`,
+                [
+                    avg.media,
+                    avg.usuario
+                ])
+    },
 }
