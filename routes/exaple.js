@@ -2,6 +2,7 @@ const prestador = require('../controller/prestador')
 const solicitador = require('../controller/solicitador')
 const servico = require('../controller/servico')
 const grafico = require('../controller/grafico')
+const login = require('../controller/login')
 const security = require('../middleware/global/security')
 
 module.exports = app => {
@@ -58,4 +59,7 @@ module.exports = app => {
 
     app.route('/avalicoes/:id')
         .get(servico.getRates)
+    
+    app.route('/login')
+        .post(login.login)
 }

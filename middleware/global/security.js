@@ -7,7 +7,6 @@ module.exports = {
         // jwt.verify(req.headers.authorization, privateKey, function(err, decoded) {
         //     console.log(decoded) // bar
         // });
-        console.log("teste");
         next()
     }
 }

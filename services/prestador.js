@@ -37,10 +37,8 @@ module.exports = {
     getPrestador: async (req, res) => {
         const oi = await prestadorDB.getPrestador()
         return oi
-        // console.log('aaaa', oi);
     },
     updateUserPrestador: async (req, res) => {
-        // console.log('pika', req.body.nome);
         var usuario = {
             nome: req.body.nome,
             email: req.body.email,
@@ -65,7 +63,6 @@ module.exports = {
             raio: req.body.raio,
             id_usuario: req.body.id_usuario
         }
-        console.log('miauzinho', usuario, prestador);
         await prestadorDB.updatePrestador(prestador)
     },
     deletePrestador: async (req, res) => {

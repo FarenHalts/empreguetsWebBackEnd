@@ -2,12 +2,20 @@
 const apiResponse = require("roit-response-api-node")
 var createUser = require('../services/prestador')
 const service = require('../services/servico')
+const user = require('../services/usuario')
 
 module.exports = {
   createPrestador: async (req, res) => {
-    let prestador = req
-    await createUser.createUserPrestador(prestador)
-    res.json(apiResponse.OkResponse(prestador[0], 'Prestador criado com sucesso!'))
+    let email = req.body.email
+    let usuario = await user.getUser(email)
+    //Verificando se já existem email cadastrados
+    if (usuario.length > 0) {
+      res.status(400).send(apiResponse.ErrorResponse(null, 'Endereço de email já utilizado!'))
+    } else {
+      let prestador = req
+      await createUser.createUserPrestador(prestador)
+      res.json(apiResponse.OkResponse(prestador[0], 'Prestador criado com sucesso!'))
+    }
   },
   getPrestador: async (req, res) => {
     const get = await createUser.getPrestador();

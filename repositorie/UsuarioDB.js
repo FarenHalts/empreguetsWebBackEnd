@@ -2,7 +2,6 @@ const DB = require('../database/db')
 
 module.exports = {
     createUser: async (user) => {
-        console.log(user);
         let response = await DB.connection()
             .execute('INSERT INTO emp_usuario ' +
                 '(nome, email, senha, telefone, cep, endereco, bairro, num_endereco, complemento, descricao_perfil, foto, tipo_usuario, solicitacao) ' +
@@ -28,11 +27,9 @@ module.exports = {
     getUsers: async () => {
         let response = await DB.connection()
             .query('SELECT * from emp_usuario;')
-        console.log('respostinha', response);
         return JSON.parse(JSON.stringify(response))
     },
     updateUser: async (user) => {
-        console.log(user.nome);
         let response = await DB.connection()
             .execute(`UPDATE emp_usuario SET nome=?, email=?, senha=?, telefone=?, cep=?, endereco=?, bairro=?, num_endereco=?, complemento=?, descricao_perfil=?, foto=?, tipo_usuario=? WHERE id_usuario=?`,
                 [
@@ -73,5 +70,13 @@ module.exports = {
                     avg.media,
                     avg.usuario
                 ])
+    },
+    verifyUser: async (email) => {
+        let response = await DB.connection()
+            .execute('SELECT * from emp_usuario WHERE email=?;',
+                [
+                    email
+                ])
+        return JSON.parse(JSON.stringify(response[0]))
     },
 }

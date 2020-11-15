@@ -21,7 +21,6 @@ module.exports = {
         return JSON.parse(JSON.stringify(response))
     },
     updatePrestador: async (user) => {
-        console.log(user);
         let response = await DB.connection()
             .query(`UPDATE emp_prestador SET cpf=?, rg=?, valor_diaria=?, raio=? WHERE id_usuario=?`,
                 [

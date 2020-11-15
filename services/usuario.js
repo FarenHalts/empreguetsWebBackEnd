@@ -1,9 +1,8 @@
-
-const UsuarioDB = require('../repositorie/UsuarioDB')
+const userDB = require('../repositorie/UsuarioDB')
 
 module.exports = {
-    getSingleUser: async (req, res) => {
-        const oi = await UsuarioDB.getSingleUser(req)
-        return oi
+    getUser: async (req, res) => {
+        const check = await userDB.verifyUser(req)
+        return check
     },
 }

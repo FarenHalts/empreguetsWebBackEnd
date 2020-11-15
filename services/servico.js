@@ -27,9 +27,7 @@ module.exports = {
             id: req.body.id_usuario
         }
         let responseVerify = await servicoDB.verifyService(verifyService)
-        console.log(responseVerify)
         return responseVerify
-        
     },
     getScheduling: async (req, res) => {
         const servicos = await servicoDB.getScheduling(req)
@@ -87,7 +85,6 @@ module.exports = {
     },
     getServices: async (req, res) => {
         const servicos = await servicoDB.getServices(req)
-        console.log(servicos);
         return servicos
     },
     checkService: async (req, res) => {

@@ -64,7 +64,6 @@ module.exports = {
             id_usuario: req.body.id_usuario
         }
         let responseSolicitador = await solicitadorDB.getSingleSolicitador(singleSolicitador.id_usuario)
-        console.log(responseSolicitador);
         // SALVANDO OS DADOS DE QUEM ESTÁ SENDO REMOVIDO
         await solicitadorDB.createRemovedSolicitador(responseSolicitador[0], removedData)
 

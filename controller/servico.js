@@ -54,7 +54,6 @@ module.exports = {
   },
   getServices: async (req, res) => {
     let id = req.params.id
-    console.log(id);
     const get = await createService.getServices(id);
     //Validando se existem serviços para o usuário requisitado
     if (get.length > 0) {
@@ -67,7 +66,6 @@ module.exports = {
   rateService: async (req, res) => {
     const service = await createService.checkService(req.body.id_servico)
     if (service.length > 0) {
-      console.log('serviciiinho',service[0]);
       //Verificando se o serviço ja foi avaliado
       if (service[0].status_servico == 'pendente') {
         let serviceDate = moment(service[0].data, "DD/MM/YYYY").format("YYYY/MM/DD")
