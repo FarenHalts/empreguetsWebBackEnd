@@ -69,7 +69,7 @@ module.exports = {
         await prestadorDB.updatePrestador(prestador)
     },
     deletePrestador: async (req, res) => {
-        const removedData = moment().format('DD-MM-YYYY');
+        const removedData = moment().format('DD-MM-YYYY HH:mm');
         // PEGANDO OS DADOS DE QUEM ESTÁ SENDO REMOVIDO
         let singlePrestador = {
             id_usuario: req.body.id_usuario

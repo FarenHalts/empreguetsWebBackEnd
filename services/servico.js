@@ -24,11 +24,12 @@ module.exports = {
     checkUser: async (req, res) => {
         //Verificando se o usuario possui algum serviço em andamento ou em solicitação
         let verifyService = {
-            id: req.body.id_usuario,
-            id2: req.body.id_usuario
+            id: req.body.id_usuario
         }
         let responseVerify = await servicoDB.verifyService(verifyService)
+        console.log(responseVerify)
         return responseVerify
+        
     },
     getScheduling: async (req, res) => {
         const servicos = await servicoDB.getScheduling(req)
@@ -39,7 +40,7 @@ module.exports = {
         return servico
     },
     discardService: async (req, res) => {
-        const discardData = moment().format('DD-MM-YYYY');
+        const discardData = moment().format('DD-MM-YYYY HH:mm');
         const discard = {
             id_agenda: req.id_agenda,
             id_requisitado: req.id_requisitado,
@@ -64,8 +65,8 @@ module.exports = {
         await servicoDB.updateSolicitation(solicitation)
     },
     acceptService: async (req, res) => {
-        const acceptData = moment().format('DD-MM-YYYY');
-        const status = 'Pendente'
+        const acceptData = moment().format('DD-MM-YYYY HH:mm');
+        const status = 'pendente'
         let valor = null
         //Validando se o usuario aceitou o novo valor proposto
         if (req.novo_valor) {
@@ -98,6 +99,7 @@ module.exports = {
         let rating = {
             id_usuarioAvaliado: service[0].id_requisitado,
             id_analista: service[0].id_usuario,
+            id_servico: service[0].id_servico,
             comentario: req.descricao_avaliacao,
             avaliacao: req.avaliacao,
             data_avaliacao: today,

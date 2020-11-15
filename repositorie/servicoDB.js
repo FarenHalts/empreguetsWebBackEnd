@@ -18,10 +18,10 @@ module.exports = {
     },
     verifyService: async (id) => {
         let response = await DB.connection()
-            .query('SELECT * FROM emp_servico WHERE id_requisitado=? OR id_usuario=? AND status_servico="Pendente"  ',
+            .query('SELECT * FROM emp_servico WHERE (id_usuario=? OR id_requisitado=?) AND (status_servico="pendente")',
                 [
                     id.id,
-                    id.id2
+                    id.id
                 ])
         return JSON.parse(JSON.stringify(response[0]))
     },
@@ -102,8 +102,9 @@ module.exports = {
     },
     getServices: async (id) => {
         let response = await DB.connection()
-            .query('SELECT * FROM emp_servico WHERE id_requisitado=? AND status_servico="Pendente" ',
+            .query('SELECT * FROM emp_servico WHERE (id_requisitado=? OR id_usuario=?) AND status_servico="pendente" ',
                 [
+                    id,
                     id
                 ])
         return JSON.parse(JSON.stringify(response[0]))
@@ -119,10 +120,11 @@ module.exports = {
     rateService: async (rateOBJ) => {
         let response = await DB.connection()
             .execute('INSERT INTO emp_avaliacoes ' +
-                '(id_usuario, id_analista, comentario, avaliacao, data_avaliacao, contratempo) ' +
-                'value (?,?,?,?,?,?);',
+                '(id_usuario, id_servico, id_analista, comentario, avaliacao, data_avaliacao, contratempo) ' +
+                'value (?,?,?,?,?,?,?);',
                 [
                     rateOBJ.id_usuarioAvaliado,
+                    rateOBJ.id_servico,
                     rateOBJ.id_analista,
                     rateOBJ.comentario,
                     rateOBJ.avaliacao,

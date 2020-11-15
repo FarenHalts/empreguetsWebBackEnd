@@ -67,16 +67,22 @@ module.exports = {
   rateService: async (req, res) => {
     const service = await createService.checkService(req.body.id_servico)
     if (service.length > 0) {
-      let serviceDate = moment(service[0].data, "DD/MM/YYYY").format("YYYY/MM/DD")
-      let rateDate = moment().format("YYYY/MM/DD")
-      //Verificando se o usuario está tentando avaliar um serviço que ainda não foi concluido
-      if (rateDate > serviceDate) {
-        await createService.rateService(service, req.body)
-        res.json(apiResponse.OkResponse(null, 'Avaliação enviada com sucesso!'))
-        //Setando a media de avaliacao no atributo avaliacao_media do usuario
-        await createService.getAverageRate(service[0].id_requisitado)
+      console.log('serviciiinho',service[0]);
+      //Verificando se o serviço ja foi avaliado
+      if (service[0].status_servico == 'pendente') {
+        let serviceDate = moment(service[0].data, "DD/MM/YYYY").format("YYYY/MM/DD")
+        let rateDate = moment().format("YYYY/MM/DD")
+        //Verificando se o usuario está tentando avaliar um serviço que ainda não foi concluido
+        if (rateDate > serviceDate) {
+          await createService.rateService(service, req.body)
+          res.json(apiResponse.OkResponse(null, 'Avaliação enviada com sucesso!'))
+          //Setando a media de avaliacao no atributo avaliacao_media do usuario
+          await createService.getAverageRate(service[0].id_requisitado)
+        } else {
+          res.status(400).send(apiResponse.ErrorResponse(null, 'O serviço ainda não foi concluido, aguarde o mesmo ser concluido para avaliar!'))
+        }
       } else {
-        res.status(400).send(apiResponse.ErrorResponse(null, 'O serviço ainda não foi concluido, aguarde o mesmo ser concluido para avaliar!'))
+        res.status(400).send(apiResponse.ErrorResponse(null, 'Esse serviço já foi avaliado!'))
       }
     } else {
       res.status(400).send(apiResponse.ErrorResponse(null, 'Não existem serviços cadastrados!'))
