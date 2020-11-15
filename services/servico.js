@@ -100,9 +100,24 @@ module.exports = {
             id_analista: service[0].id_usuario,
             comentario: req.descricao_avaliacao,
             avaliacao: req.avaliacao,
-            data_avaliacao: today
+            data_avaliacao: today,
+            contratempo: req.contratempo
         }
-        const rate = await servicoDB.rateService(rating)
+        await servicoDB.rateService(rating)
+        //Verificando se houve algum problema com o serviço
+        if (req.contratempo == 'true') {
+            let reportOBJ = {
+                id_servico: service[0].id_servico,
+                status: 'reportado'
+            }
+            await servicoDB.statusService(reportOBJ)
+        } else {
+            let doneOBJ = {
+                id_servico: service[0].id_servico,
+                status: 'concluido'
+            }
+            await servicoDB.statusService(doneOBJ)
+        }
     },
     getRates: async (req, res) => {
         const rate = await servicoDB.getRates(req)

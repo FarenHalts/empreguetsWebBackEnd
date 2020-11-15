@@ -119,14 +119,15 @@ module.exports = {
     rateService: async (rateOBJ) => {
         let response = await DB.connection()
             .execute('INSERT INTO emp_avaliacoes ' +
-                '(id_usuario, id_analista, comentario, avaliacao, data_avaliacao) ' +
-                'value (?,?,?,?,?);',
+                '(id_usuario, id_analista, comentario, avaliacao, data_avaliacao, contratempo) ' +
+                'value (?,?,?,?,?,?);',
                 [
                     rateOBJ.id_usuarioAvaliado,
                     rateOBJ.id_analista,
                     rateOBJ.comentario,
                     rateOBJ.avaliacao,
-                    rateOBJ.data_avaliacao
+                    rateOBJ.data_avaliacao,
+                    rateOBJ.contratempo
                 ])
     },
     getRates: async (id) => {
@@ -144,5 +145,14 @@ module.exports = {
                     id
                 ])
         return JSON.parse(JSON.stringify(response[0]))
+    },
+    statusService: async (reportOBJ) => {
+        let response = await DB.connection()
+            .query(`UPDATE emp_servico SET status_servico=? WHERE id_servico=?`,
+                [
+                    reportOBJ.status,
+                    reportOBJ.id_servico
+                ],
+            )
     },
 }
