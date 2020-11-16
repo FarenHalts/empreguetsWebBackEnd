@@ -3,6 +3,6 @@ const apiResponse = require("roit-response-api-node")
 
 module.exports = {
     test: async (req, res) => {
-        res.json(apiResponse.OkResponse(null, 'API funcionando!'))
+        res.json(apiResponse.OkResponse(null, 'Yuri corno!'))
     }
 }
