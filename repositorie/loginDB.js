@@ -3,7 +3,7 @@ const DB = require('../database/db')
 module.exports = {
     login: async (loginData) => {
         let response = await DB.connection()
-            .query('SELECT email, senha FROM emp_usuario WHERE email=?',
+            .query('SELECT email, senha, id_usuario FROM emp_usuario WHERE email=?',
             [
                 loginData.email
             ])

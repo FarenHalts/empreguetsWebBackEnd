@@ -62,4 +62,7 @@ module.exports = app => {
     
     app.route('/login')
         .post(login.login)
+
+    app.route('/token')
+        .get(login.token)
 }
