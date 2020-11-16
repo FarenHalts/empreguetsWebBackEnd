@@ -8,7 +8,7 @@ module.exports = {
     login: async (req, res) => {
         const getLogin = await login.login(req.body)
         //Validando se o email informado existe na base de dados
-        if (getLogin.getLogin.length != 0) {
+        if (getLogin.canShow == true) {
             const validPassword = await bcrypt.compare(req.body.senha, getLogin.getLogin[0].senha)
             //Validando se a senha informada é igual a que está cadastrada na base de dados
             if (validPassword) {
