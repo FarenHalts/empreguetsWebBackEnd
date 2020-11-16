@@ -15,8 +15,7 @@ module.exports = {
                 jwt.verify(token, process.env.JWT_KEY)
                 next()
             } catch (error) {
-                let key = process.env.JWT_KEY
-                res.status(403).send(apiResponse.ErrorResponse('key é: ' + key, 'Token inválido!'))
+                res.status(403).send(apiResponse.ErrorResponse(null, 'Token inválido!'))
             }
         }
     }
