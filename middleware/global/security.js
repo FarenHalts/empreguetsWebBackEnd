@@ -1,12 +1,22 @@
 var jwt = require('jsonwebtoken')
-var privateKey = process.env.PRIVATE_KEY
+var privateKey = process.env.JWT_KEY
+const apiResponse = require("roit-response-api-node")
 
 
 module.exports = {
     validateJwt: (req, res, next) => {
-        // jwt.verify(req.headers.authorization, privateKey, function(err, decoded) {
-        //     console.log(decoded) // bar
-        // });
-        next()
+        //Rotas que não precistam de validação
+        let whiteList = ['/prestador', '/solicitador', '/login']
+        if (req.method == "POST" && whiteList.includes(req.originalUrl)) {
+            next()
+        } else {
+            try {
+                const token = req.headers.authorization;
+                jwt.verify(token, process.env.JWT_KEY)
+                next()
+            } catch (error) {
+                res.status(403).send(apiResponse.ErrorResponse(null, 'Token inválido!'))
+            }
+        }
     }
 }
