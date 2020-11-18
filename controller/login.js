@@ -25,7 +25,6 @@ module.exports = {
         try {
             const token = req.headers.authorization;
             const decode = jwt.verify(token, process.env.JWT_KEY)
-            // console.log(decode);
             res.json(apiResponse.OkResponse(decode.id_usuario, 'Usuário validado com sucesso!'))
         } catch (error) {
             res.status(400).send(apiResponse.ErrorResponse(null, 'Token inválido!'))

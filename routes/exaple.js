@@ -4,6 +4,7 @@ const servico = require('../controller/servico')
 const grafico = require('../controller/grafico')
 const login = require('../controller/login')
 const teste = require('../controller/test')
+const user = require('../controller/usuario')
 const security = require('../middleware/global/security')
 
 module.exports = app => {
@@ -69,4 +70,7 @@ module.exports = app => {
 
     app.route('/teste')
         .get(teste.test)
+    
+    app.route('/profile')
+        .get(user.getProfile)
 }
