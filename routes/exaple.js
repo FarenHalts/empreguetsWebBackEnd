@@ -59,7 +59,7 @@ module.exports = app => {
     app.route('/avaliarservico')
         .post(servico.rateService)
 
-    app.route('/avalicoes/:id')
+    app.route('/avaliacoes/:id')
         .get(servico.getRates)
     
     app.route('/login')

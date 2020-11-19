@@ -65,6 +65,7 @@ module.exports = {
   //Avaliando servico
   rateService: async (req, res) => {
     const service = await createService.checkService(req.body.id_servico)
+    console.log(service);
     if (service.length > 0) {
       //Verificando se o serviço ja foi avaliado
       if (service[0].status_servico == 'pendente') {
@@ -89,7 +90,7 @@ module.exports = {
   //Carregando os ultimos 5 registros a fim de ser mostrado no perfil do usuario
   getRates: async (req, res) => {
     let id = req.params.id
-    //Verificando de o usuário existe na base de dados
+    //Verificando se o usuário existe na base de dados
     const user = await userService.getSingleUser(id)
     if (user.length > 0) {
       const rates = await createService.getRates(id)
