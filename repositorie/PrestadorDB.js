@@ -4,13 +4,13 @@ module.exports = {
     createPrestador: async (user) => {
         let response = await DB.connection()
             .execute('INSERT INTO emp_prestador ' +
-                '(cpf, rg, data_nascimento, valor_diaria, raio, id_usuario) ' +
+                '(cpf, rg, data_nascimento, valor_servico, raio, id_usuario) ' +
                 'value (?,?,?,?,?,?);',
                 [
                     user.cpf,
                     user.rg,
                     user.data_nascimento,
-                    user.valor_diaria,
+                    user.valor_servico,
                     user.raio,
                     user.id_usuario,
                 ])
@@ -22,11 +22,11 @@ module.exports = {
     },
     updatePrestador: async (user) => {
         let response = await DB.connection()
-            .query(`UPDATE emp_prestador SET cpf=?, rg=?, valor_diaria=?, raio=? WHERE id_usuario=?`,
+            .query(`UPDATE emp_prestador SET cpf=?, rg=?, valor_servico=?, raio=? WHERE id_usuario=?`,
                 [
                     user.cpf,
                     user.rg,
-                    user.valor_diaria,
+                    user.valor_servico,
                     user.raio,
                     user.id_usuario
                 ],
@@ -50,7 +50,7 @@ module.exports = {
     createRemovedPrestador: async (user, removedData) => {
         let response = await DB.connection()
             .execute('INSERT INTO emp_prestadores_removidos ' +
-                '(id_usuario, nome, email, telefone, cep, endereco, bairro, num_endereco, complemento, descricao_perfil, avaliacao_media, foto, tipo_usuario, id_prestador, cpf, rg, data_nascimento, valor_diaria, raio, servicos_efetuados, data_remocao) ' +
+                '(id_usuario, nome, email, telefone, cep, endereco, bairro, num_endereco, complemento, descricao_perfil, avaliacao_media, foto, tipo_usuario, id_prestador, cpf, rg, data_nascimento, valor_servico, raio, servicos_efetuados, data_remocao) ' +
                 'value (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);',
                 [
                     user.id_usuario,
@@ -70,7 +70,7 @@ module.exports = {
                     user.cpf,
                     user.rg,
                     user.data_nascimento,
-                    user.valor_diaria,
+                    user.valor_servico,
                     user.raio,
                     user.servicos_efetuados,
                     removedData

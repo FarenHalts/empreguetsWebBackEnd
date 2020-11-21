@@ -28,7 +28,7 @@ module.exports = {
             cpf: req.body.cpf,
             rg: req.body.rg,
             data_nascimento: req.body.data_nascimento,
-            valor_diaria: req.body.valor_diaria,
+            valor_servico: req.body.valor_servico,
             raio: req.body.raio,
             id_usuario: userId
         }
@@ -59,7 +59,7 @@ module.exports = {
             cpf: req.body.cpf,
             rg: req.body.rg,
             data_nascimento: req.body.data_nascimento,
-            valor_diaria: req.body.valor_diaria,
+            valor_servico: req.body.valor_servico,
             raio: req.body.raio,
             id_usuario: req.body.id_usuario
         }
