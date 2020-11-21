@@ -15,7 +15,7 @@ module.exports = {
             },
             process.env.JWT_KEY,
             {
-                expiresIn: "1h"
+                expiresIn: "5h"
             })
             let returnLogin = {
                 getLogin,
