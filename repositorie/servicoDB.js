@@ -102,7 +102,7 @@ module.exports = {
     },
     getServices: async (id) => {
         let response = await DB.connection()
-            .query('SELECT ser.id_servico, ser.id_usuario, ser.id_requisitado, ser.endereco, ser.valor, ser.data, ser.status_servico ,user.nome FROM emp_servico AS ser INNER JOIN emp_usuario AS user ON ser.id_requisitado = user.id_usuario WHERE (ser.id_requisitado=? OR ser.id_usuario=?) AND ser.status_servico="pendente" ORDER BY data ASC ',
+            .query('SELECT ser.id_servico, ser.id_usuario, ser.id_requisitado, ser.endereco, ser.valor, ser.data, ser.status_servico ,user.nome FROM emp_servico AS ser INNER JOIN emp_usuario AS user ON ser.id_requisitado = user.id_usuario WHERE (ser.id_requisitado=? OR ser.id_usuario=?) ORDER BY data ASC ',
                 [
                     id,
                     id
