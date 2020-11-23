@@ -29,13 +29,31 @@ module.exports = {
             .query('SELECT * from emp_usuario;')
         return JSON.parse(JSON.stringify(response))
     },
-    updateUser: async (user) => {
+    updateUser: async (user, password) => {
         let response = await DB.connection()
             .execute(`UPDATE emp_usuario SET nome=?, email=?, senha=?, telefone=?, cep=?, endereco=?, bairro=?, num_endereco=?, complemento=?, descricao_perfil=?, foto=?, tipo_usuario=? WHERE id_usuario=?`,
                 [
                     user.nome,
                     user.email,
-                    user.senha,
+                    password,
+                    user.telefone,
+                    user.cep,
+                    user.endereco,
+                    user.bairro,
+                    user.num_endereco,
+                    user.complemento,
+                    user.descricao_perfil,
+                    user.foto,
+                    user.tipo_usuario,
+                    user.id_usuario
+                ])
+    },
+    updateUserNoPassword: async (user) => {
+        let response = await DB.connection()
+            .execute(`UPDATE emp_usuario SET nome=?, email=?, telefone=?, cep=?, endereco=?, bairro=?, num_endereco=?, complemento=?, descricao_perfil=?, foto=?, tipo_usuario=? WHERE id_usuario=?`,
+                [
+                    user.nome,
+                    user.email,
                     user.telefone,
                     user.cep,
                     user.endereco,

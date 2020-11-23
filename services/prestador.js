@@ -42,7 +42,6 @@ module.exports = {
         var usuario = {
             nome: req.body.nome,
             email: req.body.email,
-            senha: req.body.senha,
             telefone: req.body.telefone,
             cep: req.body.cep,
             endereco: req.body.endereco,
@@ -54,7 +53,12 @@ module.exports = {
             tipo_usuario: req.body.tipo_usuario,
             id_usuario: req.body.id_usuario
         }
-        await userDB.updateUser(usuario)
+        if (req.body.senha) {
+            let senha = await bcrypt.hash(req.body.senha, 10)
+            await userDB.updateUser(usuario, senha)
+        } else {
+            await userDB.updateUserNoPassword(usuario)
+        }
         var prestador = {
             cpf: req.body.cpf,
             rg: req.body.rg,
