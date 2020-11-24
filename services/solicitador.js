@@ -83,4 +83,8 @@ module.exports = {
         const oi = await solicitadorDB.getSingleSolicitador(req)
         return oi
     },
+    getTopSolicitador: async (req, res) => {
+        const top = await solicitadorDB.getTopSolicitador()
+        return top
+    },
 }

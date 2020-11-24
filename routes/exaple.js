@@ -73,4 +73,10 @@ module.exports = app => {
     
     app.route('/profile')
         .get(user.getProfile)
+
+    app.route('/topsolicitadores')
+        .get(solicitador.getTopSolicitador)
+
+    app.route('/topprestadores')
+        .get(prestador.getTopPrestador)
 }

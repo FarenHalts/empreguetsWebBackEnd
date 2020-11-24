@@ -58,5 +58,13 @@ module.exports = {
     } else {
       res.status(400).send(apiResponse.ErrorResponse(null, 'Prestador não existe em nossa base de dados!'))
     }
+  },
+  getTopPrestador: async (req, res) => {
+    const get = await createUser.getTopPrestador();
+    if (get.length > 0) {
+      res.json(apiResponse.OkResponse(get[0], 'Prestadores encontrados com sucesso!'))
+    } else {
+      res.status(400).send(apiResponse.ErrorResponse(null, 'Houve um problema na API!'))
+    }
   }
 }

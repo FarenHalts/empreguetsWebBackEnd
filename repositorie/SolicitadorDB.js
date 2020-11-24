@@ -68,4 +68,9 @@ module.exports = {
                     user.id_usuario
                 ])
     },
+    getTopSolicitador: async () => {
+        let response = await DB.connection()
+            .query('SELECT * from emp_solicitador AS solicitador INNER JOIN emp_usuario AS usuario ON solicitador.id_usuario = usuario.id_usuario ORDER BY usuario.avaliacao_media DESC LIMIT 4;')
+        return JSON.parse(JSON.stringify(response))
+    },
 }

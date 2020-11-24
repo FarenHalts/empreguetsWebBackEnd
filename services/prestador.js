@@ -91,4 +91,8 @@ module.exports = {
         const oi = await prestadorDB.getSinglePrestador(req)
         return oi
     },
+    getTopPrestador: async (req, res) => {
+        const top = await prestadorDB.getTopPrestador()
+        return top
+    },
 }
