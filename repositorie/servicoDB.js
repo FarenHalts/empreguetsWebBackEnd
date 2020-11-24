@@ -134,7 +134,7 @@ module.exports = {
     },
     getRates: async (id) => {
         let response = await DB.connection()
-            .query('SELECT avali.id_avaliacao, avali.id_servico, avali.id_usuario, avali.id_analista, avali.comentario, avali.avaliacao, avali.data_avaliacao, avali.contratempo, usuario.nome FROM emp_avaliacoes AS avali INNER JOIN emp_usuario AS usuario ON avali.id_analista = usuario.id_usuario WHERE avali.id_usuario=? ORDER BY data_avaliacao DESC LIMIT 5',
+            .query('SELECT avali.id_avaliacao, avali.id_servico, avali.id_usuario, avali.id_analista, avali.comentario, avali.avaliacao, avali.data_avaliacao, avali.contratempo, usuario.nome, usuario.foto FROM emp_avaliacoes AS avali INNER JOIN emp_usuario AS usuario ON avali.id_analista = usuario.id_usuario WHERE avali.id_usuario=? ORDER BY data_avaliacao DESC LIMIT 5',
                 [
                     id
                 ])
