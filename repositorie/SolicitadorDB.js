@@ -75,7 +75,7 @@ module.exports = {
     },
     getLocalizationSolicitador: async () => {
         let response = await DB.connection()
-            .query(`SELECT latitude, longitude, foto, id_usuario from emp_usuario WHERE tipo_usuario='Solicitador'`)
+            .query(`SELECT lat, lng, foto, id_usuario from emp_usuario WHERE tipo_usuario='Solicitador'`)
         return JSON.parse(JSON.stringify(response))
     },
 }

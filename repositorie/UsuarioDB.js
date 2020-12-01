@@ -4,7 +4,7 @@ module.exports = {
     createUser: async (user) => {
         let response = await DB.connection()
             .execute('INSERT INTO emp_usuario ' +
-                '(nome, email, senha, telefone, cep, endereco, bairro, num_endereco, complemento, descricao_perfil, foto, tipo_usuario, solicitacao, latitude, longitude) ' +
+                '(nome, email, senha, telefone, cep, endereco, bairro, num_endereco, complemento, descricao_perfil, foto, tipo_usuario, solicitacao, lat, lng) ' +
                 'value (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);',
                 [
                     user.nome,
@@ -20,8 +20,8 @@ module.exports = {
                     user.foto,
                     user.tipo_usuario,
                     user.solicitacao,
-                    user.latitude,
-                    user.longitude
+                    user.lat,
+                    user.lng
                 ])
         console.log(response[0].insertId);
         return response[0].insertId

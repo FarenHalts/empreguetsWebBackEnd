@@ -20,8 +20,8 @@ module.exports = {
             foto: req.body.foto,
             tipo_usuario: req.body.tipo_usuario,
             solicitacao: 'false',
-            latitude: req.body.latitude,
-            longitude: req.body.longitude
+            lat: req.body.lat,
+            lng: req.body.lng
         }
         var userId = await userDB.createUser(usuario)
         var solicitador = {
