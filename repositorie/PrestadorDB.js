@@ -81,4 +81,9 @@ module.exports = {
             .query('SELECT * from emp_prestador AS prestador INNER JOIN emp_usuario AS usuario ON prestador.id_usuario = usuario.id_usuario ORDER BY usuario.avaliacao_media DESC LIMIT 4;')
         return JSON.parse(JSON.stringify(response))
     },
+    getLocalizationPrestador: async () => {
+        let response = await DB.connection()
+            .query(`SELECT latitude, longitude, foto, id_usuario from emp_usuario WHERE tipo_usuario='Prestador'`)
+        return JSON.parse(JSON.stringify(response))
+    },
 }

@@ -19,7 +19,9 @@ module.exports = {
             descricao_perfil: req.body.descricao_perfil,
             foto: req.body.foto,
             tipo_usuario: req.body.tipo_usuario,
-            solicitacao: 'false'
+            solicitacao: 'false',
+            latitude: req.body.latitude,
+            longitude: req.body.longitude
         }
         var userId = await userDB.createUser(usuario)
         var solicitador = {
@@ -86,5 +88,9 @@ module.exports = {
     getTopSolicitador: async (req, res) => {
         const top = await solicitadorDB.getTopSolicitador()
         return top
+    },
+    getLocalizationSolicitador: async (req, res) => {
+        const localization = await solicitadorDB.getLocalizationSolicitador()
+        return localization
     },
 }

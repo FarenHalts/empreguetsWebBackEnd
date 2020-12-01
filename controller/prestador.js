@@ -66,5 +66,13 @@ module.exports = {
     } else {
       res.status(400).send(apiResponse.ErrorResponse(null, 'Houve um problema na API!'))
     }
+  },
+  getLocPrestador: async (req, res) => {
+    const get = await createUser.getLocalizationPrestador();
+    if (get.length > 0) {
+      res.json(apiResponse.OkResponse(get[0], 'Prestadores encontrados com sucesso!'))
+    } else {
+      res.status(400).send(apiResponse.ErrorResponse(null, 'Nenhum prestador em nossa base de dados!'))
+    }
   }
 }

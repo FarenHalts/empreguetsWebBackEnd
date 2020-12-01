@@ -64,5 +64,13 @@ module.exports = {
     } else {
       res.status(400).send(apiResponse.ErrorResponse(null, 'Houve um problema na API!'))
     }
+  },
+  getLocSolicitador: async (req, res) => {
+    const get = await createUser.getLocalizationSolicitador();
+    if (get.length > 0) {
+      res.json(apiResponse.OkResponse(get[0], 'Solicitadores encontrados com sucesso!'))
+    } else {
+      res.status(400).send(apiResponse.ErrorResponse(null, 'Nenhum solicitador em nossa base de dados!'))
+    }
   }
 }

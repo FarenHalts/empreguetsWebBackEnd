@@ -21,7 +21,9 @@ module.exports = {
             descricao_perfil: req.body.descricao_perfil,
             foto: req.body.foto,
             tipo_usuario: req.body.tipo_usuario,
-            solicitacao: 'false'
+            solicitacao: 'false',
+            latitude: req.body.latitude,
+            longitude: req.body.longitude
         }
         var userId = await userDB.createUser(usuario)
         var prestador = {
@@ -94,5 +96,9 @@ module.exports = {
     getTopPrestador: async (req, res) => {
         const top = await prestadorDB.getTopPrestador()
         return top
+    },
+    getLocalizationPrestador: async (req, res) => {
+        const localization = await prestadorDB.getLocalizationPrestador()
+        return localization
     },
 }

@@ -79,4 +79,10 @@ module.exports = app => {
 
     app.route('/topprestadores')
         .get(prestador.getTopPrestador)
+
+    app.route('/localizationPrestador')
+        .get(prestador.getLocPrestador)
+
+    app.route('/localizationSolicitador')
+        .get(solicitador.getLocSolicitador)
 }
