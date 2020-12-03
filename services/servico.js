@@ -133,5 +133,17 @@ module.exports = {
             media: result
         }
         await usuarioDB.updateAverage(avg)
-    }
+    },
+    reserveData: async (req, res) => {
+        let reserveData = {
+            id_usuario: req.id_usuario,
+            id_requisitado: req.id_requisitado,
+            data: req.data
+        }
+        await servicoDB.reserveData(reserveData)
+    },
+    getReservedDates: async (req) => {
+        const dates = await servicoDB.getReservedDatas(req)
+        return dates
+    },
 }

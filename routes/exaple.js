@@ -85,4 +85,7 @@ module.exports = app => {
 
     app.route('/localizationSolicitador')
         .get(solicitador.getLocSolicitador)
+
+    app.route('/datasReservadas/:id')
+        .get(servico.getReservedDates)
 }

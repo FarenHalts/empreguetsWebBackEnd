@@ -41,6 +41,7 @@ module.exports = {
     let get = await createService.getScheduleId(id)
     if (get.length > 0) {
       await createService.acceptService(get[0])
+      await createService.reserveData(get[0])
       await createService.removeFromList(get[0].id_agenda)
       let verify = await createService.getScheduling(get[0].id_requisitado)
       if (verify.length == 0) {
@@ -102,6 +103,15 @@ module.exports = {
       }
     } else {
       res.status(400).send(apiResponse.ErrorResponse(null, 'Esse usuário não existe em nossa base de dados!'))
+    }
+  },
+  getReservedDates: async (req, res) => {
+    let id = req.params.id
+    const dates = await createService.getReservedDates(id)
+    if (dates.length > 0) {
+      res.json(apiResponse.OkResponse(dates, 'Datas dos serviços carregadas com sucesso!'))
+    } else {
+      res.status(400).send(apiResponse.ErrorResponse(null, 'Não foram encontradas datas de serviço para o usuario!'))
     }
   },
 }
