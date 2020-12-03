@@ -109,7 +109,7 @@ module.exports = {
     let id = req.params.id
     const dates = await createService.getReservedDates(id)
     if (dates.length > 0) {
-      res.json(apiResponse.OkResponse(dates, 'Datas dos serviços carregadas com sucesso!'))
+      res.json(apiResponse.OkResponse(dates, 'Datas dos serviços carregados com sucesso!'))
     } else {
       res.status(400).send(apiResponse.ErrorResponse(null, 'Não foram encontradas datas de serviço para o usuario!'))
     }
