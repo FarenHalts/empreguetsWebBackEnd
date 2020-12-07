@@ -5,11 +5,11 @@ require('dotenv').config()
 module.exports = {
     connection: () => {
         return mysql.createConnection({
-            port: process.env.DB_PORT,
-            host: process.env.DB_HOST,
-            user: process.env.DB_USER,
-            database: process.env.DB_NAME,
-            password: process.env.DB_PASS
+            port: "3306",
+            host: "35.198.50.41",
+            user: "empreguets",
+            database: "db_empreguets",
+            password: "emprecats"
         }).promise()
     }
 }
