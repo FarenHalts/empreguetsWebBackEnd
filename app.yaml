@@ -1,0 +1,16 @@
+runtime: nodejs
+env: 
+  DB_NAME : "db_empreguets"
+  DB_USER : "empreguets"
+  DB_PASS : "emprecats"
+  DB_HOST : "35.198.50.41"
+  DB_PORT : "3306"
+  PORT : "5000"
+  JWT_KEY : I5AumW0HjvcumVQZlV2KSQ
+
+manual_scaling:
+  instances: 1
+resources:
+  cpu: 1
+  memory_gb: 0.5
+  disk_size_gb: 10
