@@ -5,7 +5,7 @@ var app = express()
 
 require('dotenv').config()
 
-var port = process.env.PORT || 5000
+var port = 5000
 
 consign()
     .include('./middleware/global')
