@@ -62,7 +62,7 @@ module.exports = app => {
     app.route('/avaliacoes/:id')
         .get(servico.getRates)
     
-    app.route('/login')
+    app.route('login')
         .post(login.login)
 
     app.route('/token')
