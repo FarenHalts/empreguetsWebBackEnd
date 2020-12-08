@@ -115,6 +115,9 @@ module.exports = {
                 id_servico: service[0].id_servico,
                 status: 'concluido'
             }
+            //Serviço sem contratempo, adicionando mais 1 serviço para a soma de serviços totais concluidos para ambos usuarios
+            await servicoDB.incrementServices(service[0].id_requisitado)
+            await servicoDB.incrementServices(service[0].id_usuario)
             await servicoDB.statusService(doneOBJ)
         }
     },

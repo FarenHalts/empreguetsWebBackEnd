@@ -38,13 +38,13 @@ module.exports = {
     createRemovedSolicitador: async (user, removedData) => {
         let response = await DB.connection()
             .execute('INSERT INTO emp_solicitadores_removidos ' +
-                '(id_usuario, nome, email, servicos_contratados, id_solicitador, documento, valor_servico, telefone, cep, endereco, bairro, num_endereco, complemento, descricao_perfil, avaliacao_media, foto, tipo_usuario, data_remocao) ' +
+                '(id_usuario, nome, email, servicos, id_solicitador, documento, valor_servico, telefone, cep, endereco, bairro, num_endereco, complemento, descricao_perfil, avaliacao_media, foto, tipo_usuario, data_remocao) ' +
                 'value (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);',
                 [
                     user.id_usuario,
                     user.nome,
                     user.email,
-                    user.servicos_contratados,
+                    user.servicos,
                     user.id_solicitador,
                     user.documento,
                     user.valor_servico,

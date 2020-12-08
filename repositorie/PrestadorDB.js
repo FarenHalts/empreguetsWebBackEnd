@@ -12,7 +12,7 @@ module.exports = {
                     user.data_nascimento,
                     user.valor_servico,
                     user.raio,
-                    user.id_usuario,
+                    user.id_usuario
                 ])
     },
     getPrestador: async () => {
@@ -50,7 +50,7 @@ module.exports = {
     createRemovedPrestador: async (user, removedData) => {
         let response = await DB.connection()
             .execute('INSERT INTO emp_prestadores_removidos ' +
-                '(id_usuario, nome, email, telefone, cep, endereco, bairro, num_endereco, complemento, descricao_perfil, avaliacao_media, foto, tipo_usuario, id_prestador, cpf, rg, data_nascimento, valor_servico, raio, servicos_efetuados, data_remocao) ' +
+                '(id_usuario, nome, email, telefone, cep, endereco, bairro, num_endereco, complemento, descricao_perfil, avaliacao_media, foto, tipo_usuario, id_prestador, cpf, rg, data_nascimento, valor_servico, raio, servicos, data_remocao) ' +
                 'value (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);',
                 [
                     user.id_usuario,
@@ -72,7 +72,7 @@ module.exports = {
                     user.data_nascimento,
                     user.valor_servico,
                     user.raio,
-                    user.servicos_efetuados,
+                    user.servicos,
                     removedData
                 ])
     },

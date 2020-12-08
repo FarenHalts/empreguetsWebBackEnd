@@ -159,22 +159,30 @@ module.exports = {
     },
     reserveData: async (obj) => {
         let response = await DB.connection()
-            .execute('INSERT INTO emp_datas_reservadas ' +
-                '(id_usuario, id_requisitado, data_servico) ' +
-                'value (?,?,?);',
-                [
-                    obj.id_usuario,
-                    obj.id_requisitado,
-                    obj.data
-                ])
+        .execute('INSERT INTO emp_datas_reservadas ' +
+        '(id_usuario, id_requisitado, data_servico) ' +
+        'value (?,?,?);',
+        [
+            obj.id_usuario,
+            obj.id_requisitado,
+            obj.data
+        ])
     },
     getReservedDatas: async (id) => {
         let response = await DB.connection()
-            .query('SELECT * FROM emp_datas_reservadas WHERE id_usuario=? OR id_requisitado=?',
-                [
-                    id,
-                    id
-                ])
+        .query('SELECT * FROM emp_datas_reservadas WHERE id_usuario=? OR id_requisitado=?',
+        [
+            id,
+            id
+        ])
         return JSON.parse(JSON.stringify(response[0]))
     },
+    incrementServices: async (id) => {
+        let response = await DB.connection()
+            .query(`UPDATE emp_usuario SET servicos = servicos + 1 WHERE id_usuario = ?`,
+                [
+                    id
+                ],
+            )
+    }
 }

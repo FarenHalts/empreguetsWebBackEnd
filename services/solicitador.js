@@ -21,7 +21,8 @@ module.exports = {
             tipo_usuario: req.body.tipo_usuario,
             solicitacao: 'false',
             lat: req.body.lat,
-            lng: req.body.lng
+            lng: req.body.lng,
+            servicos: 0
         }
         var userId = await userDB.createUser(usuario)
         var solicitador = {
